@@ -1,0 +1,118 @@
+Тема:Основи ООП
+Мета роботи:Навчитися працювати з ООП
+Студент групи ТК-42
+Наконечний Юліан
+
+Звіт по роботі:
+1.Скопійований Python код після запуску програми вивів:
+
+Let's Start!
+>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<
+This is object: <__main__.MyName object at 0x0000024BCD57BE00> 
+This is object attribute: Bohdan / 1
+This is <class 'property'>: My name is Bohdan / Bohdan@itcollege.lviv.ua
+This is <class 'method'> call: Bohdan@itcollege.lviv.ua
+This is static <class 'function'> with defaults: You say: Hello to everyone! 
+This is class variable <class 'int'>: from class 4 / from object 4
+<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>
+>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<
+This is object: <__main__.MyName object at 0x0000024BCD546C10> 
+This is object attribute: Marta / 2
+This is <class 'property'>: My name is Marta / Marta@itcollege.lviv.ua
+This is <class 'method'> call: Marta@itcollege.lviv.ua
+This is static <class 'function'> with defaults: You say: Hello to everyone! 
+This is class variable <class 'int'>: from class 4 / from object 4
+<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>
+>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<
+This is object: <__main__.MyName object at 0x0000024BCD546AD0> 
+This is object attribute: Anonymous / 4
+This is <class 'property'>: My name is Anonymous / Anonymous@itcollege.lviv.ua
+This is <class 'method'> call: Anonymous@itcollege.lviv.ua
+This is static <class 'function'> with defaults: You say: Hello to everyone! 
+This is class variable <class 'int'>: from class 4 / from object 4
+<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>
+We are done. We create 4 names! ??? Why 4?
+
+2.Виконати приклади які розглядалися на лекція в розширенні .iphy
+
+3.Ознайомитися з програмою 
+
+4.Модифікувати програму додавши до неї своє імя:
+class MyName:
+    """Опис класу / Документація
+    """
+    total_names = 0 #Class Variable
+
+    def __init__(self, name=None) -> None:
+        self.name = name if name is not None else self.anonymous_user().name #Class attributes / Instance variables
+        MyName.total_names += 1 #modify class variable
+        self.my_id = self.total_names
+
+    @property
+    def whoami(self): 
+        """Class property
+        return: повертаємо імя 
+        """
+        return f"My name is {self.name}"
+    
+    @property
+    def my_email(self) -> str:
+        """Class property
+        return: повертаємо емейл
+        """
+        return self.create_email()
+    
+    def create_email(self) -> str:
+        """Instance method
+        """
+        return f"{self.name}@itcollege.lviv.ua"
+
+    @classmethod
+    def anonymous_user(cls):
+        """Class method
+        """
+        return cls("Anonymous")
+    
+    @staticmethod
+    def say_hello(message="Hello to everyone!"):
+        """Static method
+        """
+        return f"You say: {message}"
+
+
+print("Let's Start!")
+
+names = ("Bohdan", "Marta", "Yulian", None)
+all_names = {name: MyName(name) for name in names}
+
+for name, me in all_names.items():
+    print(f"""{">*<"*20}
+This is object: {me} 
+This is object attribute: {me.name} / {me.my_id}
+This is {type(MyName.whoami)}: {me.whoami} / {me.my_email}
+This is {type(me.create_email)} call: {me.create_email()}
+This is static {type(MyName.say_hello)} with defaults: {me.say_hello()} 
+This is class variable {type(MyName.total_names)}: from class {MyName.total_names} / from object {me.total_names}
+{"<*>"*20}""")
+
+print(f"We are done. We create {me.total_names} names! ??? Why {MyName.total_names}?")
+
+Роботу програми з додаванням свого імені можна побачити в розширенні .py
+
+5.Дати відповіді на запитання:
+   1)Коли передаємо значення None у конструктор класу MyName, об'єкт створюється з іменем "Anonymous" через  логіку у конструкторі __init__.
+   2)Щоб змінити текст привітання при виклику методу say_hello, можна передати потрібний текст як аргумент у цей метод.
+   This is static {type(MyName.say_hello)} with custom message: {me.say_hello(custom_message)} 
+   3)Функція яка порахує кількість букв в імені
+   def count_letters_in_name(self) -> int:
+    """Instance method
+    return: кількість букв в імені
+    """
+    return len(self.name)
+    Ця функція також додана в розширенні .py
+    4)Різниця полягає в тому, що в списку names є значення None, яке обробляється як "Anonymous". Це не змінює загальної кількості імен , але дає один з об'єктів з ім'ям "Anonymous". Таким чином, є чотири створених об'єкта, і всі вони мають різні імена: "Bohdan", "Marta", "Yulian" і "Anonymous".
+
+Висновок:
+В роботі було додано до пикріпленого коду функцію яка додає моє ім'я і функцію яка рахує кількість букв в іменах.Навчився працювати з функціями count_letters_in_name і  __init__.
+Також дав відповіді на всі задані запитання.Складностей рід час роботи не винекло 
+
